@@ -8,10 +8,26 @@ var init = function(canvasID){
 	image = document.getElementById("scream");
 }
 
+var drawPenguins = function(){
+	console.log("drawing");
+	var pen1 = new Image();
+	var pen2 = new Image();
+	pen1.src = 'PenguinBody.png';
+	pen2.src = 'PenguinBody.png';
+	pen1.onload = function(){
+    	pen.save();
+    	pen.scale(-1,1);
+    	pen.drawImage(pen2, 550, 600,50,50);
+    	pen.restore();
 
-var TO_RADIANS = Math.PI/180; 
-function drawRotatedImage(image, x, y, angle)
-{ 
+  	}
+  	pen2.onload = function(){
+		pen.drawImage(pen1, 0, 600,50,50);
+
+  	}
+}
+
+function drawRotatedImage(image, x, y, angle){ 
     pen.save(); 
     pen.translate(x, y); 
     pen.rotate(angle);
@@ -42,5 +58,6 @@ function getMousePos(canvas, evt) {
 		x: evt.clientX - rect.left,
 		y: evt.clientY - rect.top
 	};
+
 }
 
