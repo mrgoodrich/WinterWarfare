@@ -1,6 +1,7 @@
 var canvas;
 var pen;
 var mousepos = [0,500];
+var arrowpos = [10,550];
 var init = function(canvasID){
 	canvas = document.getElementById(canvasID);
 	pen = canvas.getContext("2d");
@@ -27,9 +28,9 @@ var drawPenguins = function(){
 
 function drawRotatedImage(image, x, y, angle, length){ 
     pen.save(); 
-    pen.translate(x-25, y-25); 
+    pen.translate(x, y); 
     pen.rotate(angle);
-    pen.drawImage(image, 0, 0,10+length/5,30);
+    pen.drawImage(image, 0, -15,10+length/5,30);
     pen.restore(); 
     //pen.drawImage(image,250,250,50,50);
 }
@@ -40,7 +41,7 @@ var drawArrow = function(mousepos){
   base_image = new Image();
   base_image.src = 'arrow.png';
   base_image.onload = function(){
-    drawRotatedImage(base_image, 0, 550, Math.atan((mousepos[1]-500)/mousepos[0]),distance);
+    drawRotatedImage(base_image, 50, 550, Math.atan((mousepos[1]-550)/(mousepos[0]-50)),distance);
   }
 }
 
