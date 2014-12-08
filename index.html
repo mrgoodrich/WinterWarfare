@@ -4,22 +4,27 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 		<script type="text/javascript" src="js/warfare.js"></script>
 		
-		<img id="scream" src="http://gtmediaproductions.com/zack/assets/images/graphics/File%20for%20offline%20printing/BONUS/extra%20bonus/arrow%203-red%20.png" alt="The Scream" width="220" height="277">
 
 		<script type="text/javascript">
 			window.onload = function(){
-				console.log("thithere");
+				init("canvas");
+				drawArrow();
+			
+				canvas.addEventListener('mousemove', function(evt) {
+					var mousePos = getMousePos(canvas, evt);
+					mousepos[0] = mousePos.x;
+					mousepos[1] = mousePos.y;
+					writeMessage(mousepos);
+					drawArrow(mousepos);
 
-				var game = new Game ("canvas");
-				game.draw();
-				
+				}, false);
+
 			}
 			
 		</script>
 	</head>
 	
 	<body>
-		<button onclick='restart()' id="reset" class="button">reset</button>
 		<canvas id="canvas" width="600" height="600"> </canvas>
 	</body>
 </html>
