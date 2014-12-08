@@ -8,16 +8,23 @@
 		<script type="text/javascript">
 			window.onload = function(){
 				init("canvas");
-				drawArrow();
 			
 				canvas.addEventListener('mousemove', function(evt) {
 					var mousePos = getMousePos(canvas, evt);
 					mousepos[0] = mousePos.x;
 					mousepos[1] = mousePos.y;
+					
+				}, false);
+
+				var run = function(){
+
+					pen.clearRect(0, 0, canvas.width, canvas.height);
 					writeMessage(mousepos);
 					drawArrow(mousepos);
 					drawPenguins();
-				}, false);
+				}
+
+				setInterval(run, 1000/24);
 
 			}
 			
@@ -25,6 +32,6 @@
 	</head>
 	
 	<body>
-		<canvas id="canvas" width="600" height="600"> </canvas>
+		<canvas id="canvas" width="1200" height="600"> </canvas>
 	</body>
 </html>
