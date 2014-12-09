@@ -10,8 +10,8 @@
 		<script type="text/javascript">
 			window.onload = function(){
 				init("canvas");
-				canvas.addEventListener('mousemove', function(evt) {
-					var mousePos = getMousePos(canvas, evt);
+				buffers[0].addEventListener('mousemove', function(evt) {
+					var mousePos = getMousePos(canvas1, evt);
 					mousepos[0] = mousePos.x;
 					mousepos[1] = mousePos.y;
 				}, false);
@@ -27,5 +27,6 @@
 	
 	<body>
 		<canvas id="canvas" width="1200" height="600"> </canvas>
+
 	</body>
 </html>

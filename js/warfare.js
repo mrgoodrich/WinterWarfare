@@ -9,9 +9,12 @@ var penguin2 = [1150,550];
 var penboxsize = 50;
 
 var init = function(canvasID){
-	canvas = document.getElementById(canvasID);
-  buffers.push(canvas);
-  buffers.push(canvas);
+	canvas1 = document.getElementById("canvas");
+  canvas2 = document.createElement("canvas");
+  canvas2.width = 1200;
+  canvas2.height = 600;
+  buffers.push(canvas1);
+  buffers.push(canvas2);
 }
 
 var drawPenguins = function(){
@@ -62,17 +65,22 @@ function getMousePos(canvas, evt) {
 }
 
 var run = function(){
-  pen= buffers[drawingbuffer].getContext('2d');
-
-  pen.clearRect(0, 0, canvas.width, canvas.height);
+  pen= buffers[drawingbuffer].getContext('2d'); // 0
+  pen.clearRect(0, 0, canvas1.width, canvas1.height);
   writeMessage(mousepos);
   drawArrow(arrowpos1,mousepos);
   drawArrow(arrowpos2,mousepos);
   drawPenguins();
 
-  buffers[1-drawingbuffer].style.visibility='hidden';
-  buffers[drawingbuffer].style.visibility='visible';
+  //buffers[drawingbuffer].style.visibility='visible';
+  //buffers[1-drawingbuffer].style.visibility='hidden';
+  pen.drawImage(buffers[drawingbuffer],0,0);
+  console.log("were about to print " + drawingbuffer);
+  //console.log(buffers[drawingbuffer].style.visibility);
+
   drawingbuffer=1-drawingbuffer;
+
+
 
 }
 

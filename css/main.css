@@ -1,5 +1,6 @@
 canvas { 
 	border: 10px solid #000; 
-	position:relative; 
-	-webkit-backface-visibility: hidden; 
+	position:absolute;
+	
+	visibility: visible; 
 }
