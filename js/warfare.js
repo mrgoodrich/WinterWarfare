@@ -12,6 +12,9 @@ var penguimg2 = new Image();
 var arroimg = new Image();
 var state = 0;
 var mouseDown = 0;
+
+
+
 var init = function(canvasID){
 	canvas1 = document.getElementById("canvas");
   canvas2 = document.createElement("canvas");
@@ -58,22 +61,26 @@ function getMousePos(canvas, evt) {
 		y: evt.clientY - rect.top
 	};
 }
-
+var b;
 var run = function(){
   draw();
   if (state == 0){
     drawArrow(arrowpos1,mousepos);
     if (mouseDown > 0){
-      state = 2;
+      state = 1
+      b = new Ball(0,[250,250],15,penguin1,[1,1]);
     }
   }else if (state == 1){
-    if (true){
+    b.step();
+    b.draw(pen);
+    if (b.touching()){
       state = 2;
     }
   }else if (state == 2){
     drawArrow(arrowpos2,mousepos);
     if (mouseDown > 0){
       state = 3;
+      b = new Ball(0,[penguin1[0],penguin1[1]],15,penguin2,[-5,5]);
     }
   }else if (state == 3){
     if (true){
@@ -82,13 +89,13 @@ var run = function(){
   }else{
     console.out("this should not be reached");
   }
+  drawPenguins();
   swap();
 }
 var draw = function(){
   pen= buffers[drawingbuffer].getContext('2d'); // 0
   pen.clearRect(0, 0, canvas1.width, canvas1.height);
   writeMessage(mousepos);
-  drawPenguins();
 }
 var swap = function(){
   pen.drawImage(buffers[drawingbuffer],0,0);
