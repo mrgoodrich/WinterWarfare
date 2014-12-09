@@ -16,10 +16,14 @@
 					mousepos[1] = mousePos.y;
 				}, false);
 
-				
+				document.body.onmousedown = function() { 
+				  ++mouseDown;
+ 				}
+				document.body.onmouseup = function() {
+				  --mouseDown;
 
+				}
 				setInterval(run, 1000/30);
-
 			}
 			
 		</script>

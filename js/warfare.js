@@ -10,7 +10,8 @@ var penboxsize = 50;
 var penguimg1 = new Image();
 var penguimg2 = new Image();
 var arroimg = new Image();
-
+var state = 0;
+var mouseDown = 0;
 var init = function(canvasID){
 	canvas1 = document.getElementById("canvas");
   canvas2 = document.createElement("canvas");
@@ -59,22 +60,38 @@ function getMousePos(canvas, evt) {
 }
 
 var run = function(){
+  draw();
+  if (state == 0){
+    drawArrow(arrowpos1,mousepos);
+    if (mouseDown > 0){
+      state = 2;
+    }
+  }else if (state == 1){
+    if (true){
+      state = 2;
+    }
+  }else if (state == 2){
+    drawArrow(arrowpos2,mousepos);
+    if (mouseDown > 0){
+      state = 3;
+    }
+  }else if (state == 3){
+    if (true){
+      state = 0;
+    }
+  }else{
+    console.out("this should not be reached");
+  }
+  swap();
+}
+var draw = function(){
   pen= buffers[drawingbuffer].getContext('2d'); // 0
   pen.clearRect(0, 0, canvas1.width, canvas1.height);
   writeMessage(mousepos);
-  drawArrow(arrowpos1,mousepos);
-  drawArrow(arrowpos2,mousepos);
   drawPenguins();
-
-  //buffers[drawingbuffer].style.visibility='visible';
-  //buffers[1-drawingbuffer].style.visibility='hidden';
+}
+var swap = function(){
   pen.drawImage(buffers[drawingbuffer],0,0);
-  console.log("were about to print " + drawingbuffer);
-  //console.log(buffers[drawingbuffer].style.visibility);
-
   drawingbuffer=1-drawingbuffer;
-
-
-
 }
 
