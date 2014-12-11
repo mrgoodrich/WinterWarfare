@@ -12,6 +12,8 @@ var penguimg2 = new Image();
 var arroimg = new Image();
 var state = 0;
 var mouseDown = 0;
+var arrowadjust = 
+var relativearrowpos2 = [arrowpos2[0],arrowpos2[1]-15];
 
 
 
@@ -35,7 +37,7 @@ var drawPenguins = function(){
     pen.drawImage(penguimg1, penguin1[0], penguin1[1],penboxsize,penboxsize);
 }
 
-var drawArrow = function(arrowpos, mousepos){
+var drawArrow = function(arrowpos, relarrowpos, mousepos){
   var length = Math.sqrt((arrowpos[1]-mousepos[1])*(arrowpos[1]-mousepos[1])+(arrowpos[0]-mousepos[0])*(arrowpos[0]-mousepos[0]));
   var angle = Math.atan((mousepos[1]-arrowpos[1])/(mousepos[0]-arrowpos[0]));
   if (mousepos[0] < arrowpos[0]){
@@ -68,7 +70,7 @@ var run = function(){
     drawArrow(arrowpos1,mousepos);
     if (mouseDown > 0){
       state = 1
-      b = new Ball(0,[250,250],15,penguin1,[1,1]);
+      b = new Ball(0,[penguin1[0]+20,penguin1[1]-30],15,penguin2,mousepos);
     }
   }else if (state == 1){
     b.step();
@@ -80,7 +82,7 @@ var run = function(){
     drawArrow(arrowpos2,mousepos);
     if (mouseDown > 0){
       state = 3;
-      b = new Ball(0,[penguin1[0],penguin1[1]],15,penguin2,[-5,5]);
+      b = new Ball(0,[penguin1[0],penguin1[1]],15,penguin2,mousepos);
     }
   }else if (state == 3){
     if (true){

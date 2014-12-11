@@ -1,12 +1,12 @@
-var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know the enemy is 50x50
+var Ball = function(wind, currentpos, radius, otherplayer, mousepos){ // we know the enemy is 50x50
 	this.wind = wind;
 	this.otherplayer = otherplayer;
 	this.radius = radius; 
 	this.currentpos = currentpos;
-	this.velocity = velocity; // vector
+	this.mousepos = mousepos; // vector
 
 	this.step = function(){
-		this.velocity[1] -= .001; // gravity;
+		this.velocity[1] += .05; // gravity;
 		this.currentpos[0] += this.velocity[0];
 		this.currentpos[1] += this.velocity[1];
 	}
@@ -23,21 +23,8 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 	}
 	this.draw = function(p){
 		p.beginPath();
-  		p.moveTo(this.currentpos[0], this.currentpos[1] - this.radius/2); // A1
-  
-	  	p.bezierCurveTo(
-	    	this.currentpos[0] + this.radius/2, this.currentpos[1] - this.radius/2, // C1
-	    	this.currentpos[0] + this.radius/2, this.currentpos[1] + this.radius/2, // C2
-	    	this.currentpos[0], this.currentpos[1] + this.radius/2); // A2
-
-	  	p.bezierCurveTo(
-	   		this.currentpos[0] - this.radius/2, this.currentpos[1] + this.radius/2, // C3
-	    	this.currentpos[0] - this.radius/2, this.currentpos[1] - this.radius/2, // C4
-	    	this.currentpos[0], this.currentpos[1] - this.radius/2); // A1
-	 
-	  	p.fillStyle = "red";
-	  	p.fill();
-	  	p.closePath();	
+		p.arc(currentpos[0],currentpos[1],radius,0,2*Math.PI);
+		p.stroke();
 	}
 
 }
