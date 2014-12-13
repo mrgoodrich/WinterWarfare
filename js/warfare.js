@@ -3,7 +3,9 @@ var buffers = [];
 var pen;
 var mousepos = [0,0];
 var arrowpos1 = [40,550];
+var arrowpoint1 = [arrowpos1[0],arrowpos1[1]-15];
 var arrowpos2 = [1120,550];
+var arrowpoint2 = [arrowpos2[0],arrowpos2[1]-15];
 var penguin1 = [10,550];
 var penguin2 = [1150,550];
 var penboxsize = 50;
@@ -12,10 +14,6 @@ var penguimg2 = new Image();
 var arroimg = new Image();
 var state = 0;
 var mouseDown = 0;
-var arrowadjust = 
-var relativearrowpos2 = [arrowpos2[0],arrowpos2[1]-15];
-
-
 
 var init = function(canvasID){
 	canvas1 = document.getElementById("canvas");
@@ -37,7 +35,7 @@ var drawPenguins = function(){
     pen.drawImage(penguimg1, penguin1[0], penguin1[1],penboxsize,penboxsize);
 }
 
-var drawArrow = function(arrowpos, relarrowpos, mousepos){
+var drawArrow = function(arrowpos, mousepos){
   var length = Math.sqrt((arrowpos[1]-mousepos[1])*(arrowpos[1]-mousepos[1])+(arrowpos[0]-mousepos[0])*(arrowpos[0]-mousepos[0]));
   var angle = Math.atan((mousepos[1]-arrowpos[1])/(mousepos[0]-arrowpos[0]));
   if (mousepos[0] < arrowpos[0]){
@@ -70,7 +68,8 @@ var run = function(){
     drawArrow(arrowpos1,mousepos);
     if (mouseDown > 0){
       state = 1
-      b = new Ball(0,[penguin1[0]+20,penguin1[1]-30],15,penguin2,mousepos);
+      velocity = [(mousepos[0]-arrowpoint1[0])/100, (arrowpoint1[1]-mousepos[1])/100];
+      b = new Ball(0,[arrowpoint1[0],arrowpoint1[1]],15,penguin2,velocity);
     }
   }else if (state == 1){
     b.step();
@@ -82,10 +81,13 @@ var run = function(){
     drawArrow(arrowpos2,mousepos);
     if (mouseDown > 0){
       state = 3;
-      b = new Ball(0,[penguin1[0],penguin1[1]],15,penguin2,mousepos);
+      velocity = [(mousepos[0]-arrowpoint2[0])/100, (arrowpoint2[1]-mousepos[1])/100];
+      b = new Ball(0,[arrowpoint2[0],arrowpoint2[1]],15,penguin1,velocity);
     }
   }else if (state == 3){
-    if (true){
+    b.step();
+    b.draw(pen);
+    if (b.touching()){
       state = 0;
     }
   }else{
