@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+    	
+    	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 
 		<script type="text/javascript" src="js/warfare.js"></script>
 		<script type="text/javascript" src="js/ball.js"></script>
 		
-
 		<script type="text/javascript">
 			window.onload = function(){
 				init("canvas");
@@ -16,13 +21,11 @@
 					mousepos[0] = mousePos.x;
 					mousepos[1] = mousePos.y;
 				}, false);
-
 				document.body.onmousedown = function() { 
 				  ++mouseDown;
  				}
 				document.body.onmouseup = function() {
 				  --mouseDown;
-
 				}
 				setInterval(run, 1);
 			}
@@ -31,7 +34,38 @@
 	</head>
 	
 	<body>
-		<canvas id="canvas" width="1200" height="600"> </canvas>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+	        <div class="container">
+	            <!-- Brand and toggle get grouped for better mobile display -->
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="/polls/home/">Games</a>
+	            </div>
+	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	                <ul class="nav navbar-nav">
+	                    <li>
+	                        <a href="/polls/make/">WinterWarfare</a>
+	                    </li>
+	                    <li>
+	                        <a href="/polls/make/">SlitherStrike</a>
+	                    </li>
+	                </ul>
+	            </div>
+	            <!-- /.navbar-collapse -->
+	            
+	        </div>
+	        <!-- /.container -->
+	    </nav>
 
+
+		<canvas id="canvas" width="1200" height="600"> </canvas>
+		
+		<script src="bootstrap/js/jquery.js"></script>
+    	<script src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>

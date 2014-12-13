@@ -1,5 +1,8 @@
 canvas { 
-	border: 10px solid #ababab; 
+	border: 2px solid #000; 
 	position:absolute;
+	position-top: 53px;
+	margin: 53px;
 	visibility: visible; 
 }
+
