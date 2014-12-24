@@ -15,14 +15,14 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 			return 1;
 		}
 		if (velocity > 1){  //See which way ball is moving for collision detection with respect to radius
-			if (this.currentpos[0]+this.radius>this.otherplayer[0]&&this.currentpos[0]+this.radius/2<this.otherplayer[0]+50){  //redo with draw respect to center of obj
-				if(this.currentpos[1]+this.radius>this.otherplayer[1]-50){
+			if (this.currentpos[0]+this.radius>this.otherplayer[0]&&this.currentpos[0]-this.radius<this.otherplayer[0]+30){  //redo with draw respect to center of obj
+				if(this.currentpos[1]+this.radius>this.otherplayer[1]+20	){
 					return 2;
 				}
 			}
 		}
 		else{
-			if (this.currentpos[0]<this.otherplayer[0]+50&&this.currentpos[0]>this.otherplayer[0]){
+			if (this.currentpos[0]<this.otherplayer[0]+	50&&this.currentpos[0]>this.otherplayer[0]){
 				if(this.currentpos[1]+this.radius>this.otherplayer[1]-50){
 					return 2;
 				}
@@ -33,7 +33,6 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 	this.draw = function(p){
 		p.beginPath();
 		p.arc(currentpos[0],currentpos[1],radius,0,2*Math.PI);
-		p.arc(0,0,radius,0,2*Math.PI);
 		p.stroke();
 	}
 
