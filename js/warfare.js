@@ -16,7 +16,7 @@ var state = -1;
 var mouseDown = 0;
 var score = [0,0];
 var mDown = false; //boolean for main menu, important to ensure that the first shot isnt sent upon mouse click
-
+//
 var init = function(canvasID){
 	canvas1 = document.getElementById("canvas");
   canvas2 = document.createElement("canvas");
