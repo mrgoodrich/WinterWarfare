@@ -96,24 +96,25 @@ var run = function(){
     writeMainMenu();
     if (mouseDown > 0){
       mDown = true;
+      state = 0;
     }
-    if (mouseDown == 0 && mDown){
+    if (mouseDown === 0 && mDown){
       mDown = false;
       state = 0;
     }
   }
-  else if (state == 0){
+  else if (state === 0){
     drawArrow(arrowpos1,mousepos);
     if (mouseDown > 0){
       mDown = true;
     }
-    if (mouseDown == 0 && mDown){
+    if (mouseDown === 0 && mDown){
       mDown = false;
-      state = 1
+      state = 1;
       velocity = [(mousepos[0]-arrowpoint1[0])/100, (arrowpoint1[1]-mousepos[1])/100];
       b = new Ball(0,[arrowpoint1[0],arrowpoint1[1]],15,penguin2,velocity);
     }
-  }else if (state == 1){
+  }else if (state === 1){
     b.step();
     b.draw(pen);
     if (b.touching()==2){ //hit

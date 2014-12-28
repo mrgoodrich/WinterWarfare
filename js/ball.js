@@ -11,29 +11,49 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 		this.currentpos[1] -= this.velocity[1];
 	}
 	this.touching = function(){
-		if (this.currentpos[1]>600-this.radius){
+		if (this.currentpos[1]>(600-this.radius)){
 			return 1;
 		}
-		if (velocity > 1){  //See which way ball is moving for collision detection with respect to radius
-			if (this.currentpos[0]+this.radius>this.otherplayer[0]&&this.currentpos[0]+this.radius/2<this.otherplayer[0]+50){  //redo with draw respect to center of obj
-				if(this.currentpos[1]+this.radius>this.otherplayer[1]-50){
-					return 2;
-				}
+
+		var sides_inside = 0;
+		var compensation = 10; 
+
+		if (otherplayer[0] < 600){ // penguin on the left
+			// left border (no compensation)
+			if (currentpos[0]-radius >= otherplayer[0] || currentpos[0]+radius >= otherplayer[0]){
+				sides_inside += 1;
+			} 
+			// right border (compensation)
+			if (currentpos[0]-radius <= otherplayer[0]-compensation || currentpos[0]+radius <= otherplayer[0]-compensation){
+				sides_inside += 1;
+			}
+		}else{ // penguin on the right
+			// left border (compensation)
+			if (currentpos[0]-radius >= otherplayer[0]-compensation || currentpos[0]+radius >= otherplayer[0]-compensation){
+				sides_inside += 1;
+			} //x
+			// right border (no compensation)
+			if (currentpos[0]-radius <= otherplayer[0] || currentpos[0]+radius <= otherplayer[0]){
+				sides_inside += 1;
 			}
 		}
-		else{
-			if (this.currentpos[0]<this.otherplayer[0]+50&&this.currentpos[0]>this.otherplayer[0]){
-				if(this.currentpos[1]+this.radius>this.otherplayer[1]-50){
-					return 2;
-				}
-			}
+		
+		// top border (no compensation)
+		if (currentpos[1]+radius >= otherplayer[1]){
+			sides_inside += 1;
 		}
-		return 0;
+
+		// if we are touching more than 3 sides at once
+		if (sides_inside == 3){
+			return 2;
+		}else{
+			return 0;
+		}
 	}
 	this.draw = function(p){
 		p.beginPath();
 		p.arc(currentpos[0],currentpos[1],radius,0,2*Math.PI);
-		p.arc(0,0,radius,0,2*Math.PI);
+		//p.arc(0,0,radius,0,2*Math.PI);
 		p.stroke();
 	}
 
