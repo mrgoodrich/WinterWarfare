@@ -35,8 +35,6 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 			// right border (no compensation)
 			if (currentpos[0]-radius <= otherplayer[0] || currentpos[0]+radius <= otherplayer[0]){
 				sides_inside += 1;
-			}
-		}
 		
 		// top border (no compensation)
 		if (currentpos[1]+radius >= otherplayer[1]){
@@ -53,7 +51,6 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 	this.draw = function(p){
 		p.beginPath();
 		p.arc(currentpos[0],currentpos[1],radius,0,2*Math.PI);
-		//p.arc(0,0,radius,0,2*Math.PI);
 		p.stroke();
 	}
 
