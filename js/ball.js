@@ -35,6 +35,8 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 			// right border (no compensation)
 			if (currentpos[0]-radius <= otherplayer[0] || currentpos[0]+radius <= otherplayer[0]){
 				sides_inside += 1;
+			}
+		}
 		
 		// top border (no compensation)
 		if (currentpos[1]+radius >= otherplayer[1]){
