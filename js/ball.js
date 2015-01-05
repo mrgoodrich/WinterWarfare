@@ -4,6 +4,8 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 	this.radius = radius; 
 	this.currentpos = currentpos;
 	this.velocity = velocity; // vector
+	this.snowballimg = new Image();
+	this.snowballimg.src = 'snowball.png';
 
 	this.step = function(){
 		this.velocity[1] -= .05; // gravity;
@@ -51,9 +53,7 @@ var Ball = function(wind, currentpos, radius, otherplayer, velocity){ // we know
 		}
 	}
 	this.draw = function(p){
-		p.beginPath();
-		p.arc(currentpos[0],currentpos[1],radius,0,2*Math.PI);
-		p.stroke();
+		p.drawImage(this.snowballimg,currentpos[0],currentpos[1],radius*2,radius*2);
 	}
 
 }

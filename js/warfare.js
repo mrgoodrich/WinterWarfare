@@ -11,6 +11,7 @@ var penguin2 = [1150,550];
 var penboxsize = 50;
 var penguimg1 = new Image();
 var penguimg2 = new Image();
+var background = new Image();
 var arroimg = new Image();
 var state = -1;
 var mouseDown = 0;
@@ -26,6 +27,7 @@ var init = function(canvasID){
   buffers.push(canvas2);
   penguimg1.src = 'PenguinBody.png';
   penguimg2.src = 'PenguinBody.png';
+  background.src = 'snowybackground.png';
   arroimg.src = 'arrow.png';
 }
 
@@ -94,6 +96,7 @@ var run = function(){
   draw();
   if (state == -1){ //Main menu
     writeMainMenu();
+    drawArrow(arrowpos1,mousepos);
     if (mouseDown > 0){
       mDown = true;
       state = 0;
@@ -112,7 +115,7 @@ var run = function(){
       mDown = false;
       state = 1;
       velocity = [(mousepos[0]-arrowpoint1[0])/100, (arrowpoint1[1]-mousepos[1])/100];
-      b = new Ball(0,[arrowpoint1[0],arrowpoint1[1]],15,penguin2,velocity);
+      b = new Ball(0,[arrowpoint1[0],arrowpoint1[1]],20,penguin2,velocity);
     }
   }else if (state === 1){
     b.step();
@@ -134,7 +137,7 @@ var run = function(){
       mDown = false;
       state = 3;
       velocity = [(mousepos[0]-arrowpoint2[0])/100, (arrowpoint2[1]-mousepos[1])/100];
-      b = new Ball(0,[arrowpoint2[0],arrowpoint2[1]],15,penguin1,velocity);
+      b = new Ball(0,[arrowpoint2[0],arrowpoint2[1]],20,penguin1,velocity);
     }
   }else if (state == 3){
     b.step();
@@ -156,11 +159,10 @@ var run = function(){
 var draw = function(){
   pen= buffers[drawingbuffer].getContext('2d'); // 0
   pen.clearRect(0, 0, canvas1.width, canvas1.height);
-  writeMessage(mousepos);
+  pen.drawImage(background,0,0);
   writeScore();
 }
 var swap = function(){
   pen.drawImage(buffers[drawingbuffer],0,0);
   drawingbuffer=1-drawingbuffer;
 }
-
